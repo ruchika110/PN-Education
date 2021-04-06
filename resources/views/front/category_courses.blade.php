@@ -48,14 +48,14 @@
 							<div class="col-lg-4 col-md-6 col-sm-6">
 								<div class="course-post">
 									<div class="course-thumbnail-holder">
-										<a href="single-course.html">
+										<a href="{{url('front/course_detail/'.$s->id)}}">
 											<img style="width: 250px; height: 200px;" src="{{ url('/upload/'.$s->image) }}" alt="">
 										</a>
 									</div>
 									<div class="course-content-holder">
 										<div class="course-content-main">
 											<h2 class="course-title">
-												<a href="single-course.html">{{$s->name}}</a>
+												<a href="{{url('front/course_detail/'.$s->id)}}">{{$s->name}}</a>
 											</h2>
 											<div class="course-rating-teacher">
 												<div class="star-rating has-ratings" title="Rated 5.00 out of 5">

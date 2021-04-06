@@ -182,6 +182,30 @@
               </p>
             </a>
           </li>
+           <li class="nav-item">
+            <a href="{{url('admin/notification')}}" class="nav-link">
+              <i class="far fa-circle nav-icon text-white"></i>
+              <p class="text-white">
+                Notification 
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="{{url('admin/workshop')}}" class="nav-link">
+              <i class="far fa-circle nav-icon text-white"></i>
+              <p class="text-white">
+                Workshop 
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('admin/coupon')}}" class="nav-link">
+              <i class="far fa-circle nav-icon text-white"></i>
+              <p class="text-white">
+                Coupon 
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link"  
               onclick="event.preventDefault();document.getElementById('logout-form').submit();">

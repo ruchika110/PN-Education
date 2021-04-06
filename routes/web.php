@@ -50,16 +50,25 @@ Route::get('front/signup','FrontendController@signup');
 Route::post('front/signup_save','FrontendController@signup_save');
 Route::get('front/login','FrontendController@login');
 Route::post('front/login_save','FrontendController@login_save');
-Route::get('front/cart','FrontendController@cart');
 Route::get('front/our_team','FrontendController@our_team');
 Route::get('front/interns','FrontendController@interns');
 Route::get('front/placements','FrontendController@placements');
 Route::get('front/contact','FrontendController@contact');
 Route::post('front/add_contact','ContactFormController@save');
+Route::get('front/checkout','FrontendController@checkout');
+
+// Frontend Work Workshop
+
+Route::get('front/MPCT','FrontendController@MPCT_workshop');
+Route::get('front/Xiaomi','FrontendController@Xiaomi_workshop');
+Route::get('front/Bentchair','FrontendController@Bentchair_workshop');
+Route::get('front/RJIT','FrontendController@RJIT_workshop');
 
 //add to cart
 
+Route::get('front/cart','FrontendController@cart');
 Route::post('add_cart','FrontendController@add_cart');
+Route::get('cart/quantity_update/{id}/{course_quantity}','FrontendController@quantity_update');
 
 //Banner Controller
 
@@ -122,6 +131,35 @@ Route::get('admin/contact/edit/{id}','ContactController@edit');
 Route::post('admin/contact/update','ContactController@update');
 Route::get('admin/contact/delete/{id}','ContactController@delete');
 Route::get('admin/contact_data','ContactController@contact_data');
+
+//NotificationController
+
+Route::get('admin/notification','NotificationController@notification');
+Route::post('admin/notification/save','NotificationController@save');
+Route::get('admin/notification','NotificationController@display');
+Route::get('admin/notification/edit/{id}','NotificationController@edit');
+Route::post('admin/notification/update','NotificationController@update');
+Route::get('admin/notification/delete/{id}','NotificationController@delete');
+
+//Coupon Controller
+
+Route::get('admin/coupon','CouponController@coupon');
+Route::post('admin/coupon/save','CouponController@save');
+Route::get('admin/coupon','CouponController@display');
+Route::get('admin/coupon/edit/{id}','CouponController@edit');
+Route::post('admin/coupon/update','CouponController@update');
+Route::get('admin/coupon/delete/{id}','CouponController@delete');
+
+//workshop controller
+
+Route::get('admin/workshop','WorkshopController@workshop');
+Route::post('admin/workshop/save','WorkshopController@save');
+Route::get('admin/workshop','WorkshopController@display');
+Route::get('admin/workshop/edit/{id}','WorkshopController@edit');
+Route::post('admin/workshop/update','WorkshopController@update');
+Route::get('admin/workshop/delete/{id}','WorkshopController@delete');
+
+
 
 
 

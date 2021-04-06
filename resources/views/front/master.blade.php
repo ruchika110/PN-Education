@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
+	<link rel="icon" href="https://firebasestorage.googleapis.com/v0/b/pn-images.appspot.com/o/logo%2Fcolorlogo.png?alt=media&token=0386f0aa-e1e1-4950-924f-3eedaa82d967">
 	<title>@yield("title")</title>
 
 	<meta charset="utf-8">
@@ -15,6 +16,11 @@
 	<link rel="stylesheet" type="text/css" href="{{url('css/fonts/iconfont/material-icons.css')}}" media="screen">
 	<link rel="stylesheet" type="text/css" href="{{url('css/style.css')}}">
 
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script> $(document).ready(function(){ $('#mymodel').modal('show');}); </script>
+
 </head>
 <body>
 
@@ -24,7 +30,7 @@
 		    ================================================== -->
 		<header class="clearfix">
 
-			<div class="top-line bg-info">
+			<div class="top-line bg-#2e3e77;">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-6">
@@ -98,6 +104,25 @@
 							<li>
 							<a href="{{url('front/our_team')}}">Our Team</a>
 						</li>
+
+						<li class="drop-link">
+								<a href="#">Workshop <i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown">
+									<li>
+										<a href="{{url('front/Xiaomi')}}">Xiaomi MI Company</a>
+									</li>
+									<li>
+										<a href="{{url('front/Bentchair')}}">Bentchair Company</a>
+									</li>
+									<li>
+										<a href="{{url('front/MPCT')}}">MPCT College</a>
+									</li>
+									<li>
+										<a href="{{url('front/RJIT')}}">RJIT College</a>
+									</li>
+								</ul>
+							</li>
+
 						<li>
 							<a href="{{url('front/interns')}}">Intern</a>
 						</li>
@@ -107,6 +132,16 @@
 						<li>
 							<a href="{{url('front/contact')}}">Contact</a>
 						</li>
+						<li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link"  
+              onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+             
+              <input style="position: relative; left: 271px; bottom: -4px;" class="btn btn-info" type="button" value="Logout">
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf 
+            </form>
+          </li>
 						</ul>
 						<a href="{{url('front/signup')}}" class="register-modal-opener"><input class="btn btn-info" type="submit" name="submit" value="Signup"></a>
 
@@ -143,6 +178,23 @@
 						<li>
 							<a href="our_team.html">Our Team</a>
 						</li>
+						<li class="drop-link">
+								<a href="#">Workshop <i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown">
+									<li>
+										<a href="{{url('front/Xiaomi')}}">Xiaomi MI Company</a>
+									</li>
+									<li>
+										<a href="{{url('front/Bentchair')}}">Bentchair Company</a>
+									</li>
+									<li>
+										<a href="{{url('front/MPCT')}}">MPCT College</a>
+									</li>
+									<li>
+										<a href="{{url('front/RJIT')}}">RJIT College</a>
+									</li>
+								</ul>
+							</li>
 						<li>
 							<a href="intern.html">Intern</a>
 						</li>

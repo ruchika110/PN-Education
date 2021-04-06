@@ -22,6 +22,9 @@
 	<input class="btn btn-success" type="submit" name="submit" value="Login">
 	<br><br>
 </form>
+
+<input class="btn btn-success" type="submit" name="submit" value="Create an Account">
+	<br><br>
 </div><!-----end col-md-4----->
 <div class="col-md-4"></div>
 </div><!-----end row----->

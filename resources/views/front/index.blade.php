@@ -4,6 +4,34 @@
 
 @section('content')
 
+<div class="modal fade" id="mymodel" style="padding-top: 145px;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-info lg">
+        <h5 class="modal-title" >Notifications</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	
+      	@foreach($notify as $n)
+        
+        <ul>
+			<li>
+			    <h2>{{$n->notification}}<img src="https://www.rgpv.ac.in/Images/new_icon_blink.gif"></h2>
+			    
+			</li>
+		</ul>
+
+		@endforeach
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 <!-- home-section 
 			================================================== -->
 		<section id="home-section">

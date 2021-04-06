@@ -15,17 +15,23 @@ use App\Team;
 use App\Intern;
 use App\Placement;
 use App\Contact;
+use App\Notification;
+use App\Workshop;
+use Session;
+use DB;
+use Auth;
 
 class FrontendController extends Controller
 {
     public function create()
     {
+        $notify = Notification::all();
     	$display = Banner::all();
         $disp = Navbar::all();
         $dis = Online_course::all();
         $view = Category::all();
         $show = Courses::all();
-    	return view('front.index',compact('display','disp','dis','view','show'));
+    	return view('front.index',compact('display','disp','dis','view','show','notify'));
     }
 
     public function save(Request $b)
@@ -128,6 +134,10 @@ class FrontendController extends Controller
         $data->email = $x->email;
         $data->password = Hash::make($x->password);
         $data->save();
+        if($data)
+        {
+            return redirect('front/signup')->with('message','Added successfully');
+        }
     }
 
     public function login()
@@ -136,30 +146,35 @@ class FrontendController extends Controller
         return view('front.login',compact('disp'));
     }
 
-    public function login_save(Request $l)
+    public function login_save(Request $a)
     {
-      // print_r($l->all());
-        $query = User::where('email',$l->email)->where('password',$l->password)->get()->first();
-        // print_r($query);
-        if ($query) {
-            return redirect('front/signup');
+        $session_id = Session::getId();
+        $data=$a->all();
+        if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
+            cart::where('session_id',$session_id)->update(['user_email'=>$data['email']]);
+            return redirect("front/cart")->with('message','Login Successfully');
         }
         else{
-            return redirect('front/login');
+            return redirect("front/login")->with('message','Login Unsuccessfully');
         }
     }
 
     public function add_cart(Request $a)
     {
         // print_r($a->all());
-        // print_r($a->all());
+        // die;
+        $session_id = Session::getId();
+        // print_r($session_id);
         // die;
         $data = new cart();
         $data->course_name = $a->course_name;
         $data->course_id = $a->course_id;
         $data->course_price = $a->course_price;
         $data->image = $a->course_image;
+        $data->session_id = $session_id;
         $data->save();
+        // print_r($data);
+        // die;
         if ($data) {
             return redirect('front/cart');
         }
@@ -167,8 +182,21 @@ class FrontendController extends Controller
 
     public function cart()
     {
+        $session_id = Session::getId();
+        // print_r($session_id);
         $disp = Navbar::all();
-        $cart = cart::all();
+        if (Auth::check()) 
+        {
+            $user_email = Auth::User()->email;
+            $cart =Cart::where('user_email',$user_email)->get();
+
+        }
+        else
+        {
+            $session_id = Session::getId();
+            $cart =Cart::where('session_id',$session_id)->get();
+        }
+        
         return view('front.cart',compact('disp','cart'));
     }
 
@@ -199,5 +227,57 @@ class FrontendController extends Controller
         $con = Contact::all();
         return view('front.contact',compact('disp','con'));
     }
+
+    public function MPCT_workshop()
+    {
+        $disp= Navbar::all();
+        $work = Workshop::where('workshop_title','MPCT College')->get();
+        // echo "<pre>";
+        // print_r($view);
+         return view('front.MPCT',compact('disp','work'));
+    }
+    
+     public function Xiaomi_workshop()
+    {
+        $disp= Navbar::all();
+        $work = Workshop::where('workshop_title','Xiaomi MI Company')->get();
+        // echo "<pre>";
+        // print_r($view);
+         return view('front.Xiaomi',compact('disp','work'));
+    }
+
+    public function Bentchair_workshop()
+    {
+        $disp= Navbar::all();
+        $work= Workshop::where('workshop_title','Bentchair Company')->get();
+        // echo "<pre>";
+        // print_r($view);
+         return view('front.Bentchair',compact('disp','work'));
+    }
+
+    public function RJIT_workshop()
+    {
+        $disp= Navbar::all();
+        $work = Workshop::where('workshop_title','RJIT College')->get();
+        // echo "<pre>";
+        // print_r($view);
+         return view('front.RJIT',compact('disp','work'));
+    }
+
+    public function quantity_update($id=null,$course_quantity=null)
+    {
+        // echo $id;
+        // echo $course_quantity;
+        DB::table('carts')->where('id',$id)->increment('course_quantity',$course_quantity);
+        return redirect('front/cart')->with('message','Product Quantity has been updated');
+    }
+
+    public function checkout()
+    {
+        $disp = Navbar::all();
+        return view('front.checkout',compact('disp'));
+    }
 }
+
+
 
