@@ -25,21 +25,23 @@
 					<div class="col-lg-8">
 						<div class="cart-box">
 							<h2>Billing details</h2>
-							<form class="billing-details">
+							<form class="billing-details" method="post" action="{{url('front/checkout/insert_order')}}">
+								@csrf
+
 								<div class="row">
 									<div class="col-lg-6">
-										<label for="first-name">First Name*</label>
-										<input type="text" id="first-name" />
+										<label for="first-name">Name*</label>
+										<input type="text" id="first-name" name="name" value="{{Auth::user()->name}}" />
 									</div>
 									<div class="col-lg-6">
-										<label for="last-name">Last Name*</label>
-										<input type="text" id="last-name" />
+										
 									</div>
 								</div>
-								<label for="company-name">Company name (optional)</label>
-								<input type="text" id="company-name" />
+								<input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+								
+								
 								<label for="country">Country*</label>
-								<select id="country">
+								<select id="country" name="country">
 									<option>Country...</option>
 									<option>Albania</option>
 									<option>USA</option>
@@ -52,22 +54,21 @@
 									<option>Australia</option>
 								</select>
 								<label for="street-name">Street address *</label>
-								<input type="text" id="street-name" placeholder="House number and street name" />
-								<input type="text" id="street-name2" placeholder="Apartment, suite, unit etc. (optional)" />
+								<input type="text" name="address" id="street-name" placeholder="House number and street name" />
 								<label for="city-name">Town / City*</label>
-								<input type="text" id="city-name" />
+								<input type="text" name="city" id="city-name" />
 								<label for="state-name">State / Country*</label>
-								<input type="text" id="state-name" />
+								<input type="text" name="state" id="state-name" />
 								<label for="postcode-name">Postcode / Zip*</label>
-								<input type="text" id="postcode-name" />
+								<input type="text" name="pincode" id="postcode-name" />
 								<label for="phone-name">Phone*</label>
-								<input type="text" id="phone-name" />
+								<input type="text" name="phone" id="phone-name" />
 								<label for="email-address">Email Address*</label>
-								<input type="text" id="email-address" />
+								<input type="text" name="user_email" id="email-address" value="{{Auth::user()->email}}" />
 								<h2>Additional information</h2>
 								<label for="notes">Order notes (optional)</label>
-								<textarea id="notes" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
-							</form>
+								<textarea id="notes" name="order_note" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+							
 						</div>
 					</div>
 					<div class="col-lg-4">
@@ -80,29 +81,37 @@
 											<td>Product</td>
 											<td>Total</td>
 										</tr>
+
+										<?php $total_amount=0; ?>
+
+									    @foreach($cart as $c)
+									    <?php  
+                                        $total_amount=$total_amount+($c->course_price*$c->course_quantity);
+									    ?>
 										<tr>
-											<td class="name-pro">Introduction Web Design with HTML  × 1</td>
-											<td>$244</td>
+											<td class="name-pro">{{$c->course_name}}  × {{$c->course_quantity}}</td>
+											<td>₹{{$c->course_price}}</td>
 										</tr>
-										<tr>
-											<td class="name-pro">Distance Learning MBA Management  × 1</td>
-											<td>$29.99</td>
-										</tr>
+							            @endforeach
+
 										<tr class="order-total">
 											<th>Subtotal</th>
-											<td>273.99</td>
+											<td>₹<?php echo $total_amount; ?></td>
 										</tr>
 										<tr class="order-total">
 											<th>Total</th>
-											<td class="total-price">273.99</td>
+											<td class="total-price">₹<?php echo$total_amount; ?></td>
 										</tr>
 									</tbody>
 								</table>
-								<a href="#" class="checkout-button">Proceed to Paypal</a>
+								<input type="submit" name="submit" value="proceed to complete" class="btn" style="background-color:orange;width:330px;border-radius: 35px;margin-bottom:10px;padding: 10px;"></input>
+								
+
 							</div>
 						</div>
 					</div>
 				</div>
+				</form>
 			</div>
 		</section>
 		<!-- End cart section -->

@@ -102,36 +102,18 @@
 							<div class="products-widget widget">
 								<h2>Products</h2>
 								<ul class="products-list">
+									@foreach($show as $s)
 									<li>
-										<a href="single-course.html"><img src="upload/courses/thumb1.jpg" alt=""></a>
+										<a href="single-course.html"><img src="{{ url('/upload/'.$s->image) }}" alt=""></a>
 										<div class="list-content">
-											<h3><a href="single-course.html">Introduction Web Design with HTML</a></h3>
-											<span>$244</span>
+											<h3><a href="single-course.html">{{$s->name}}</a></h3>
+											<span>{{$s->price}}</span>
 										</div>
 									</li>
-									<li>
-										<a href="single-course.html"><img src="upload/courses/thumb2.jpg" alt=""></a>
-										<div class="list-content">
-											<h3><a href="single-course.html">Special Education Needs Teaching</a></h3>
-											<span>$74.99</span>
-										</div>
-									</li>
-									<li>
-										<a href="single-course.html"><img src="upload/courses/thumb3.jpg" alt=""></a>
-										<div class="list-content">
-											<h3><a href="single-course.html">Environmental Science BTEC Course</a></h3>
-											<span>$59.99</span>
-										</div>
-									</li>
-									<li>
-										<a href="single-course.html"><img src="upload/courses/thumb4.jpg" alt=""></a>
-										<div class="list-content">
-											<h3><a href="single-course.html">Distance Learning MBA Management</a></h3>
-											<span>$17.88</span>
-										</div>
-									</li>
+									@endforeach
 								</ul>
 							</div>
+
 
 							<div class="ads-widget widget">
 								<a href="#">

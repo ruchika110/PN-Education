@@ -1,6 +1,6 @@
 @extends("front.master")
 
-@section("title",'Home | PN Education')
+@section("title",'Cart | PN Education')
 
 @section("content")
 
@@ -66,6 +66,14 @@
 									<?php $total_amount=$total_amount+($c->course_price*$c->course_quantity);?>
 
 									@endforeach
+
+									<tr class="coupon-line"> 
+										<td colspan="6" class="actions">
+											<input type="text" name="coupon_code" placeholder="Coupon code">
+											<button type="submit">Update cart</button>
+										</td>
+									</tr>
+									
 								</tbody>
 							</table>
 						</div>
@@ -86,7 +94,15 @@
 										</tr>
 									</tbody>
 								</table>
+
+								 @if(!Auth::check('login'))
 								<a href="{{url('front/login')}}" class="checkout-button">Proceed to checkout</a>
+
+								@else
+								<a href="{{url('front/checkout')}}" class="checkout-button">Proceed to checkout</a>
+
+								@endif
+								
 							</div>
 						</div>
 					</div>

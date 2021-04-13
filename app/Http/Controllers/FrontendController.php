@@ -163,6 +163,27 @@ class FrontendController extends Controller
     {
         // print_r($a->all());
         // die;
+        if(Auth::check()) {
+        $session_id = Session::getId();
+        $user_email= Auth::User()->email;
+        // print_r($session_id);
+        // die;
+        $data = new cart();
+        $data->course_name = $a->course_name;
+        $data->course_id = $a->course_id;
+        $data->course_price = $a->course_price;
+        $data->image = $a->course_image;
+        $data->session_id = $session_id;
+        $data->user_email = $user_email;
+        $data->save();
+        // print_r($data);
+        // die;
+        if ($data) {
+            return redirect('front/cart');
+        }
+
+        }
+        else {
         $session_id = Session::getId();
         // print_r($session_id);
         // die;
@@ -177,6 +198,7 @@ class FrontendController extends Controller
         // die;
         if ($data) {
             return redirect('front/cart');
+        }
         }
     }
 
@@ -275,7 +297,13 @@ class FrontendController extends Controller
     public function checkout()
     {
         $disp = Navbar::all();
-        return view('front.checkout',compact('disp'));
+        if (Auth::check()) 
+        {
+            $user_email = Auth::User()->email;
+            $cart =Cart::where('user_email',$user_email)->get();
+
+        }
+        return view('front.checkout',compact('disp','cart'));
     }
 }
 

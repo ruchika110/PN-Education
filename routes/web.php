@@ -159,6 +159,12 @@ Route::get('admin/workshop/edit/{id}','WorkshopController@edit');
 Route::post('admin/workshop/update','WorkshopController@update');
 Route::get('admin/workshop/delete/{id}','WorkshopController@delete');
 
+//course order route work 
+Route::post('front/checkout/insert_order','CourseOrderController@insert');
+
+//thanks route
+Route::get('front/thanks','CourseOrderController@thank');
+
 
 
 
